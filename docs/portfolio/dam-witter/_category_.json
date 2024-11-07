@@ -1,0 +1,10 @@
+{
+  "label": "dam-witter : 담위터",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "dam-witter 프로젝트에 관련된 내용입니다."
+  },
+  "collapsible": true,
+  "collapsed": false
+}
