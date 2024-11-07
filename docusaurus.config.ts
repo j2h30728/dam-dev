@@ -51,7 +51,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/dam-dev-card.png",
     navbar: {
       title: "Dam dev",
       logo: {
