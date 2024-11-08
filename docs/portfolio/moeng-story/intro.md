@@ -4,10 +4,12 @@ sidebar_position: 1
 
 # 소개
 
-- 팀프로젝트
+- 팀프로젝트 : 프론트엔드 2, 백엔드 1, 디자인 1
 - 2024.03 ~ 진행 중
 - [Github](https://github.com/meong-story/meong-story-FE)
 - 기술 스택 : React, TypeScript, tanstack-query, Styled-component, MSW, react-hook-form
+
+- [프로토타입 피그마](https://www.figma.com/proto/I5LW0C1lbZLp4ne5DV0DsC/%EB%A9%8D%EC%8A%A4%ED%86%A0%EB%A6%AC?page-id=0%3A1&type=design&node-id=630-7219&viewport=-179%2C451%2C0.17&t=08fWo8ofebZjgK0i-1&scaling=scale-down&starting-point-node-id=630%3A7219&show-proto-sidebar=1)
 
 ## 개발 계기
 
