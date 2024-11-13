@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.6.0">
 <title data-rh="true">AI 코멘트 | Dam dev</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://j2h30728.github.io/dam-dev/img/dam-dev-card.png"><meta data-rh="true" name="twitter:image" content="https://j2h30728.github.io/dam-dev/img/dam-dev-card.png"><meta data-rh="true" property="og:url" content="https://j2h30728.github.io/dam-dev/docs/portfolio/boost-pal/trouble-aicomment"><meta data-rh="true" property="og:locale" content="ko"><meta data-rh="true" name="docusaurus_locale" content="ko"><meta data-rh="true" name="docsearch:language" content="ko"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="AI 코멘트 | Dam dev"><meta data-rh="true" name="description" content="Open AI"><meta data-rh="true" property="og:description" content="Open AI"><link data-rh="true" rel="icon" href="/dam-dev/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://j2h30728.github.io/dam-dev/docs/portfolio/boost-pal/trouble-aicomment"><link data-rh="true" rel="alternate" href="https://j2h30728.github.io/dam-dev/docs/portfolio/boost-pal/trouble-aicomment" hreflang="ko"><link data-rh="true" rel="alternate" href="https://j2h30728.github.io/dam-dev/docs/portfolio/boost-pal/trouble-aicomment" hreflang="x-default"><link rel="stylesheet" href="/dam-dev/assets/css/styles.9bb80656.css">
-<script src="/dam-dev/assets/js/runtime~main.6b3cbae7.js" defer="defer"></script>
+<script src="/dam-dev/assets/js/runtime~main.eec4077e.js" defer="defer"></script>
 <script src="/dam-dev/assets/js/main.e3a7439e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -32,8 +32,8 @@ Open REST API를 사용하여 OpenAI를 사용합니다.<br></p>
 <li>인증 기록이 등록되면, <strong>AWS SQS</strong>에 해당 기록에 대한 작업 요청이 전달됩니다. 이 작업 요청은 <strong>AWS Lambda</strong>에서 처리하게 됩니다.</li>
 <li><strong>AWS Lambda</strong>는 전달된 인증 기록의 글과 이미지를 분석하여 <strong>OpenAI</strong> API에 메시지 요청을 보내어 AI 코멘트를 생성합니다.</li>
 <li>생성된 AI 코멘트는 <strong>데이터베이스</strong>의 <code>AiComment</code> 테이블에 등록됩니다</li>
-<li><strong>Subbase Realtime</strong>을 통해 <code>AiComment</code> 테이블을 구독하고 있는 <strong>제출한 인증 기록 상세 페이지</strong>에 해당 변경 사항이 실시간  으로 반영됩니다.</li>
-<li><strong>제출한 인증 기록 상세 페이지</strong>는 AI 코멘트 등록이 완료되면, 로딩 상태에서 벗어나 AI 코멘트를 포함한 최종 내용을 사용자에게 표시합니다.</li>
+<li>인증 기록 상세 페이지에서, <strong>Supabase Realtime을 통해 구독하고 있는 AiComment 테이블 변경사항을 일어나면 변경사항이 실시간으로 반영</strong>됩니다.</li>
+<li>AiComment 테이블에서 <strong>코멘트 등록(INSERT 이벤트)이 완료</strong>되면, 로딩 컴포넌트를 <strong>AI 코멘트로 교체</strong>하여 최종 내용을 사용자에게 표시합니다.</li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="트러블-슈팅">트러블 슈팅<a href="#트러블-슈팅" class="hash-link" aria-label="트러블 슈팅에 대한 직접 링크" title="트러블 슈팅에 대한 직접 링크">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-비동기-ai-코멘트-생성-문제-해결"><strong>1. 비동기 AI 코멘트 생성 문제 해결</strong><a href="#1-비동기-ai-코멘트-생성-문제-해결" class="hash-link" aria-label="1-비동기-ai-코멘트-생성-문제-해결에 대한 직접 링크" title="1-비동기-ai-코멘트-생성-문제-해결에 대한 직접 링크">​</a></h3>
@@ -41,7 +41,7 @@ Open REST API를 사용하여 OpenAI를 사용합니다.<br></p>
 <p>Open AI 메시지 생성 시간에 지연이 존재합니다. 사용자가 인증을 완료한 후 등록하는 로직에 AI 코멘트 등록 로직을 추가할 경우, 지연이 발생합니다.</p>
 <table><thead><tr><th>변경 전</th><th>변경 후</th></tr></thead><tbody><tr><td><img decoding="async" loading="lazy" alt="변경전" src="/dam-dev/assets/images/initail-upload-e1c788c9a9f211d267fdebadf337b033.gif" width="500" height="724" class="img_ev3q"></td><td><img decoding="async" loading="lazy" alt="변경후" src="/dam-dev/assets/images/upload-8314b2090d58d54a046b2eba6ba0e127.gif" width="400" height="877" class="img_ev3q"></td></tr></tbody></table>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="해결">해결<a href="#해결" class="hash-link" aria-label="해결에 대한 직접 링크" title="해결에 대한 직접 링크">​</a></h4>
-<p>AI 코멘트를 비동기적으로 처리하기 위해 AWS SQS와 AWS Lambda를 도입했습니다.<br></p>
+<p>AI 코멘트를 비동기적으로 처리하기 위해 AWS SQS와 AWS Lambda를 도  입했습니다.<br></p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="해결-과정">해결 과정<a href="#해결-과정" class="hash-link" aria-label="해결 과정에 대한 직접 링크" title="해결 과정에 대한 직접 링크">​</a></h4>
 <ol>
 <li>사용자가 인증을 제출한 후, <code>setImmediate</code> 함수를 사용하여 비동기로 AI 코멘트를 생성하려 했지만 배포환경인 Vercel 서버리스 환경에서 타임아웃 문제가 발생했습니다.<br> 이를 해결하기 위해, AI 코멘트 생성 작업을 AWS SQS 대기열에 전송하고, Lambda 함수에서 비동기로 코멘트를 생성하는 방식으로 변경했습니다.<br></li>
